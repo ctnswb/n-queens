@@ -227,13 +227,15 @@
       //if minor diagonal is negative
       if (minorDiagonalColumnIndexAtFirstRow >= this.get('n')) {
         var start = minorDiagonalColumnIndexAtFirstRow - this.get('n') + 1;   //position 5 ====>  5 - 4 +1 = 2
-        var end = this.get('n') - 1;                                          // 4-1 = 3
+        var end = this.get('n') - 1;
+        var col = this.get('n') - 1;                         // 4-1 = 3
         for (var i = start; i <= end; i++) {
-          if (this.get(i)[this.get('n')+1-i] === 1 && !HAS_ONE) {       //[2][3]
+          if (this.get(i)[col] === 1 && !HAS_ONE) {       //[2][3]
             HAS_ONE = true;
-          } else if (this.get(i)[this.get('n')+1-i] === 1 && HAS_ONE) {
+          } else if (this.get(i)[col] === 1 && HAS_ONE) {
             return true;
           }
+          col--;
         }
       } else if (minorDiagonalColumnIndexAtFirstRow < this.get('n')) {
         var start = 0;
@@ -252,6 +254,15 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
+      var start = 1;
+      var end = (this.get('n')-1)*2;
+
+      for (var i = start; i < end; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+
       return false; // fixme
     }
 
