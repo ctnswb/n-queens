@@ -109,10 +109,6 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      //this.get(i)[colIndex]
-      //get the n for size
-      //loop through for loop on rowIndex while keeping same colIndex
-      // if 2 exists  return true
 
       var size = this.get('n');
       var HAS_ONE = false;
@@ -146,7 +142,7 @@
     // test if a specific major diagonal on this board contains a conflict
     hasMajorDiagonalConflictAt: function(majorDiagonalColumnIndexAtFirstRow) {
       var HAS_ONE = false;
-      //if major diagonal is negative
+
       if (majorDiagonalColumnIndexAtFirstRow < 0) {
         for (var i = 0 ; i < this.get('n') - Math.abs(majorDiagonalColumnIndexAtFirstRow) ; i++) {
           if (this.get(i+Math.abs(majorDiagonalColumnIndexAtFirstRow))[i] === 1 && !HAS_ONE) {
@@ -167,40 +163,6 @@
 
       return false; // fixme
     },
-
-    /*
-        [  0,  1,  2, 3 ]    [ [n-4, n-4] , [n-4, n-3] , [n-4, n-2] , [n-4, n-1] ]
-        [ -1, 01, 02, 4 ]    [ [n-3, n-4] , [n-3, n-3] , [n-3, n-2] , [n-3, n-1] ]
-        [ -2, 01, 02, 5 ]    [ [n-2, n-4] , [n-2, n-3] , [n-2, n-2] , [n-2, n-1] ]
-        [ -3, 01, 02, 6 ]    [ [n-1, n-4] , [n-1, n-3] , [n-1, n-2] , [n-1, n-1] ]
-
-4- size +1
-5- 4 + 1 = 2
-
-        [00, 01, 02, 03 ]
-        [10, 11, 12, 13 ]
-        [20, 21, 22, 23 ]
-        [30, 31, 32, 33 ]
-
-        1 - 2
-        2 - 3
-
-        majorDiagonalColumnIndexAtFirstRow = colIndex - rowIndex;
-
-    */
-
-    // if minor index > n
-    // row start = index - size  - 1 = 1
-    // row end = size - 1 = 3
-    //    *diagnonal of 4
-    //    [1][3]  =>  [i][this.get('n')-i]
-    //    [2][2]
-    //    [3][1]
-
-    //                        i = 0; i<=index
-    //    [0][2]  =>  [0][index]   => this.get(i)[index - i]
-    //    [1][1]
-    //    [2][0]
 
     // test if any major diagonals on this board contain conflicts
     hasAnyMajorDiagonalConflicts: function() {
@@ -224,7 +186,7 @@
       //minorDiagonalColumnIndexAtFirstRow = colIndex + rowIndex;
 
       var HAS_ONE = false;
-      //if minor diagonal is negative
+
       if (minorDiagonalColumnIndexAtFirstRow >= this.get('n')) {
         var start = minorDiagonalColumnIndexAtFirstRow - this.get('n') + 1;   //position 5 ====>  5 - 4 +1 = 2
         var end = this.get('n') - 1;
