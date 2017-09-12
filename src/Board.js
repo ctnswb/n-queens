@@ -120,7 +120,7 @@
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
     // test if any columns on this board contain conflicts
@@ -131,7 +131,7 @@
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -161,7 +161,7 @@
         }
       }
 
-      return false; // fixme
+      return false;
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -173,7 +173,7 @@
           return true;
         }
       }
-      return false; // fixme
+      return false;
     },
 
 
@@ -188,11 +188,11 @@
       var HAS_ONE = false;
 
       if (minorDiagonalColumnIndexAtFirstRow >= this.get('n')) {
-        var start = minorDiagonalColumnIndexAtFirstRow - this.get('n') + 1;   //position 5 ====>  5 - 4 +1 = 2
+        var start = minorDiagonalColumnIndexAtFirstRow - this.get('n') + 1;
         var end = this.get('n') - 1;
-        var col = this.get('n') - 1;                         // 4-1 = 3
+        var col = this.get('n') - 1;
         for (var i = start; i <= end; i++) {
-          if (this.get(i)[col] === 1 && !HAS_ONE) {       //[2][3]
+          if (this.get(i)[col] === 1 && !HAS_ONE) {
             HAS_ONE = true;
           } else if (this.get(i)[col] === 1 && HAS_ONE) {
             return true;
