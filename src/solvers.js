@@ -25,12 +25,10 @@
 
 */
 
-
-
 // return a matrix (an array of arrays) representing a single nxn chessboard, with n rooks placed such that none of them can attack each other
 
 window.findNRooksSolution = function(n) {
-  var solution = new Board({'n':n});
+  var solution = new Board({'n': n});
   solution.get(0)[0] = 1;
 
   var find = function (piecesLeft, currentBoard) {
@@ -39,21 +37,21 @@ window.findNRooksSolution = function(n) {
     if (piecesLeft === 0) {
       return board;
     }
-    for (var rowPointer = 0; rowPointer < size ; rowPointer++) {
-      for (var colPointer = 0; colPointer < size ; colPointer++) {
+    for (var rowPointer = 0; rowPointer < size; rowPointer++) {
+      for (var colPointer = 0; colPointer < size; colPointer++) {
         if (board.get(rowPointer)[colPointer] === 0) {
           board.get(rowPointer)[colPointer] = 1;
           if (board.hasRowConflictAt(rowPointer) || board.hasColConflictAt(colPointer)) {
             board.get(rowPointer)[colPointer] = 0;
           } else {
-            find(piecesLeft-1, board);
+            find(piecesLeft - 1, board);
           }
         }
       }
     }
-  }
+  };
 
-  find(n-1,solution);
+  find(n - 1, solution);
 
   console.log('Single solution for ' + n + ' rooks:', JSON.stringify(solution));
   return solution.rows();
@@ -70,26 +68,26 @@ window.countNRooksSolutions = function(n) {
       solutionCount++;
       return board;
     }
-    for (var rowPointer = currentRow; rowPointer < size ; rowPointer++) {
-      for (var colPointer = 0; colPointer < size ; colPointer++) {
+    for (var rowPointer = currentRow; rowPointer < size; rowPointer++) {
+      for (var colPointer = 0; colPointer < size; colPointer++) {
         if (board.get(rowPointer)[colPointer] === 0) {
           board.get(rowPointer)[colPointer] = 1;
           if (board.hasRowConflictAt(rowPointer) || board.hasColConflictAt(colPointer)) {
             board.get(rowPointer)[colPointer] = 0;
           } else {
             var newSolution = new Board(board.rows());
-            find(piecesLeft-1, newSolution, rowPointer);
+            find(piecesLeft - 1, newSolution, rowPointer);
             board.get(rowPointer)[colPointer] = 0;
           }
         }
       }
     }
-  }
+  };
 
-  for (var i = 0 ; i < n ; i++) {
-    var solution = new Board({'n':n});
+  for (var i = 0; i < n; i++) {
+    var solution = new Board({'n': n});
     solution.get(0)[i] = 1;
-    find(n-1,solution, 0);
+    find(n - 1, solution, 0);
   }
 
   console.log('Number of solutions for ' + n + ' rooks:', solutionCount);
@@ -108,8 +106,8 @@ window.findNQueensSolution = function(n) {
       oneSolution = JSON.stringify(board);
       return true;
     }
-    for (var rowPointer = currentRow; rowPointer < size ; rowPointer++) {
-      for (var colPointer = 0; colPointer < size ; colPointer++) {
+    for (var rowPointer = currentRow; rowPointer < size; rowPointer++) {
+      for (var colPointer = 0; colPointer < size; colPointer++) {
         if (board.get(rowPointer)[colPointer] === 0) {
           board.get(rowPointer)[colPointer] = 1;
           if (board.hasRowConflictAt(rowPointer) ||
@@ -119,38 +117,37 @@ window.findNQueensSolution = function(n) {
             board.get(rowPointer)[colPointer] = 0;
           } else {
             var newSolution = new Board(board.rows());
-            find(piecesLeft-1, newSolution, rowPointer);
+            find(piecesLeft - 1, newSolution, rowPointer);
             board.get(rowPointer)[colPointer] = 0;
           }
         }
       }
     }
-  }
+  };
 
-  if (n!==0 && n!==2 && n!==3) {
+  if (n !== 0 && n !== 2 && n !== 3) {
     var solution = null;
-    for (var i = 0 ; i < n ; i++) {
-      solution = new Board({'n':n});
+    for (var i = 0; i < n; i++) {
+      solution = new Board({'n': n});
       solution.get(0)[i] = 1;
-      find(n-1,solution, 0);
-      if (oneSolution !== undefined && typeof oneSolution === 'string' ){
+      find(n - 1, solution, 0);
+      if (oneSolution !== undefined && typeof oneSolution === 'string' ) {
         oneSolution = JSON.parse(oneSolution);
 
         var matrix = [];
-        for (var x in oneSolution){
-          if (Array.isArray(oneSolution[x])){
+        for (var x in oneSolution) {
+          if (Array.isArray(oneSolution[x])) {
             matrix.push(oneSolution[x]);
           }
-        };
-        if (matrix.length >0) {
+        }
+        if (matrix.length > 0) {
           oneSolution = new Board(matrix);
           break;
         }
       }
     }
-  }
-  else {
-    oneSolution = new Board({'n':n});
+  } else {
+    oneSolution = new Board({'n': n});
   }
   console.log('Single solution for ' + n + ' queens:', JSON.stringify(oneSolution));
   return oneSolution.rows();
@@ -167,8 +164,8 @@ window.countNQueensSolutions = function(n) {
       solutionCount++;
       return board;
     }
-    for (var rowPointer = currentRow; rowPointer < size ; rowPointer++) {
-      for (var colPointer = 0; colPointer < size ; colPointer++) {
+    for (var rowPointer = currentRow; rowPointer < size; rowPointer++) {
+      for (var colPointer = 0; colPointer < size; colPointer++) {
         if (board.get(rowPointer)[colPointer] === 0) {
           board.get(rowPointer)[colPointer] = 1;
           if (board.hasRowConflictAt(rowPointer) || board.hasColConflictAt(colPointer)
@@ -177,19 +174,19 @@ window.countNQueensSolutions = function(n) {
             board.get(rowPointer)[colPointer] = 0;
           } else {
             var newSolution = new Board(board.rows());
-            find(piecesLeft-1, newSolution, rowPointer);
+            find(piecesLeft - 1, newSolution, rowPointer);
             board.get(rowPointer)[colPointer] = 0;
           }
         }
       }
     }
-  }
+  };
 
   if (n !== 0) {
-    for (var i = 0 ; i < n ; i++) {
-      var solution = new Board({'n':n});
+    for (var i = 0; i < n; i++) {
+      var solution = new Board({'n': n});
       solution.get(0)[i] = 1;
-      find(n-1,solution, 0);
+      find(n - 1, solution, 0);
     }
   } else {
     solutionCount = 1;
